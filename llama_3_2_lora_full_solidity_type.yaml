@@ -1,0 +1,42 @@
+### model
+model_name_or_path: meta-llama/Llama-3.2-3B
+
+### method
+stage: sft
+do_train: true
+finetuning_type: lora
+lora_target: all
+
+
+### dataset
+dataset: solidity_typescript_pyano_train
+template: llama3
+cutoff_len: 8192
+overwrite_cache: true
+preprocessing_num_workers: 16
+
+### output
+output_dir: /finetuned/llama3_3_2B_sft_lora_full_solidity_typescript_pyano
+logging_steps: 250
+save_steps: 2500
+plot_loss: true
+overwrite_output_dir: true
+
+### train
+per_device_train_batch_size: 2
+gradient_accumulation_steps: 2
+learning_rate:  0.000005
+num_train_epochs: 3.0
+lr_scheduler_type: cosine
+warmup_ratio: 0.1
+bf16: true
+ddp_timeout: 180000000
+
+### eval
+val_size: 0.1
+per_device_eval_batch_size: 1
+eval_strategy: steps
+eval_steps: 500
+
+report_to: wandb
+run_name: llama_3.2_sol_type_full_lora_sft
