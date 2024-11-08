@@ -1,0 +1,22 @@
+model_name_or_path: /home/deadbytes/Documents/Pyano/finetuned/qwen2.5_1.5B_sft_lora_qkv_42500
+
+### method
+stage: sft
+do_predict: true
+finetuning_type: lora
+
+### dataset
+eval_dataset: solidity_pyano_test
+template: qwen
+cutoff_len: 8192
+max_samples: 300
+overwrite_cache: true
+preprocessing_num_workers: 4
+### output
+output_dir: finetuned/qwen25-1-5B
+overwrite_output_dir: true
+
+### eval
+per_device_eval_batch_size: 1
+predict_with_generate: true
+ddp_timeout: 180000000
